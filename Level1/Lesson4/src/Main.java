@@ -88,6 +88,14 @@ public class Main {
     }
 
     static void handleAIMove(char[][] field, int size) {
+        //Первым ходом центр
+        //Остальные ходы просто пресекают попытки поставить 3 крестика подряд
+
+        //Если центр уже занят и ходим в угол, то
+        //Второй ход в противоположный угол
+        //Или центр, и третим ходом в бок, переходя в наступление
+        int playerSignsInRow = 0;
+
         Random random = new Random();
         int x;
         int y;
@@ -100,7 +108,55 @@ public class Main {
         field[x][y] = AIsign();
     }
 
+    static int findLineWithNumberOfSigns(char[][] field, char sign, int number, char orientation) {
+        if (orientation == 'h' || orientation == 'v') {
+            int horizontalNumber = 0;
+            int verticalNumber = 0;
+            int i = 0;
+            int j = 0;
 
+            for (i = 0; i < field.length; i++) {
+                horizontalNumber = 0;
+                verticalNumber = 0;
+                for (j = 0; j < field[i].length; j++) {
+                    if (field[i][j] == sign) {
+                        horizontalNumber++;
+                    }
+                    if (field[j][i] == sign) {
+                        verticalNumber++;
+                    }
+                }
+            }
+            if (orientation == 'h' && horizontalNumber == number) {
+                return i; //Вернуть номер строки
+            }
+            if (orientation == 'v' && verticalNumber == number) {
+                return j; //Вернуть номер столбца
+            }
+        }
+
+        if (orientation == 'd') {
+            int mainDiagonalNumber = 0;
+            int sideDiagonalNumber = 0;
+
+            for (int i = 0; i < field.length; i++) {
+                if (field[i][i] == sign) {
+                    mainDiagonalNumber++;
+                }
+
+                if (field[i][field.length - 1 - i] == sign) {
+                    sideDiagonalNumber++;
+                }
+            }
+            if (mainDiagonalNumber == number) {
+                return 0;
+            }
+            if (sideDiagonalNumber == number) {
+                return 1;
+            }
+        }
+        return -1;
+    }
     
     static boolean isDraw(char[][] field) {
         for (int i = 0; i < field.length; i++) {
@@ -129,7 +185,7 @@ public class Main {
                 if (field[j][i] == sign) {
                     verticalNumber++;
                 }
-                }
+            }
             if (horizontalNumber == field.length || verticalNumber == field.length) {
                 return true;
             }
