@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -43,11 +44,14 @@ public class Main {
     static char[][] getField(int size, char emptySign) {
         char[][] field = new char[size][size];
 
-        for (int i = 0; i < field.length; i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < field[i].length; j++) {
                 field[i][j] = emptySign;
             }
 
+        }
+        for (char[] chars : field) {
+            Arrays.fill(chars, '-');
         }
 
         return field;
@@ -88,54 +92,89 @@ public class Main {
     }
 
     static void handleAIMove(char[][] field, int size) {
-        //Первым ходом центр
-        //Остальные ходы просто пресекают попытки поставить 3 крестика подряд
-
-        //Если центр уже занят и ходим в угол, то
-        //Второй ход в противоположный угол
-        //Или центр, и третим ходом в бок, переходя в наступление
-        int playerSignsInRow = 0;
-
-        Random random = new Random();
-        int x;
-        int y;
-
-        do {
-            x = random.nextInt(size);
-            y = random.nextInt(size);
-        } while(field[x][y] != emptySign());
-
-        field[x][y] = AIsign();
-    }
-
-    static int findLineWithNumberOfSigns(char[][] field, char sign, int number, char orientation) {
-        if (orientation == 'h' || orientation == 'v') {
-            int horizontalNumber = 0;
-            int verticalNumber = 0;
-            int i = 0;
-            int j = 0;
-
-            for (i = 0; i < field.length; i++) {
-                horizontalNumber = 0;
-                verticalNumber = 0;
-                for (j = 0; j < field[i].length; j++) {
-                    if (field[i][j] == sign) {
-                        horizontalNumber++;
-                    }
-                    if (field[j][i] == sign) {
-                        verticalNumber++;
+        //Пытаюсь найти линию с наибольшим количеством X и вставить туда O
+        //orientation: h(horizontal, v(vertical), md(main diagonal), sd(side diagonal)
+        String[] orientations = getOrientations();
+        for (int number = field.length - 1; number > 0; number--) {
+            for (int orientation = 0; orientation < orientations.length; orientation++) {
+                for (int lineNumber = 0; lineNumber < size; lineNumber++) {
+                    if (isLineWithNumberOfSigns(field, playerSign(), number, orientations[orientation], lineNumber)) {
+                        if (tryMakeMove(field, AIsign(), orientations[orientation], lineNumber)) {
+                            return;
+                        }
                     }
                 }
             }
-            if (orientation == 'h' && horizontalNumber == number) {
-                return i; //Вернуть номер строки
+        }
+    }
+
+    static boolean isEmptyCoordinate(char[][] field, int x, int y) {
+        return field[x][y] == emptySign();
+    }
+
+    static String[] getOrientations() {
+        String[] orientations = {"h","v","md","sd"};
+        return orientations;
+    }
+
+    static boolean tryMakeMove(char[][] field, char sign, String orientation, int lineNumber) {
+        if (orientation == "h" || orientation == "v") {
+            for (int i = 0; i < field.length; i++) {
+                if (orientation == "h") {
+                    if (isEmptyCoordinate(field, lineNumber, i)) {
+                        field[lineNumber][i] = sign;
+                        return true;
+                    }
+                }
+                if (orientation == "v") {
+                    if (isEmptyCoordinate(field, i, lineNumber)) {
+                        field[i][lineNumber] = sign;
+                        return true;
+                    }
+                }
             }
-            if (orientation == 'v' && verticalNumber == number) {
-                return j; //Вернуть номер столбца
+        }
+        if (orientation == "md" || orientation == "sd") {
+            for (int i = 0; i < field.length; i++) {
+                if (orientation == "md") {
+                    if (isEmptyCoordinate(field, i, i)) {
+                        field[i][i] = sign;
+                        return true;
+                    }
+                }
+                if (orientation == "sd") {
+                    if (isEmptyCoordinate(field, i, field.length - 1 - i)) {
+                        field[i][field.length - 1 - i] = sign;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    static boolean isLineWithNumberOfSigns(char[][] field, char sign, int number, String orientation, int lineNumber) {
+        if (orientation == "h" || orientation == "v") {
+            int horizontalNumber = 0;
+            int verticalNumber = 0;
+
+            for (int i = 0; i < field.length; i++) {
+                if (field[lineNumber][i] == sign) {
+                    horizontalNumber++;
+                }
+                if (field[i][lineNumber] == sign) {
+                    verticalNumber++;
+                }
+            }
+            if (orientation == "h" && horizontalNumber == number) {
+                return true;
+            }
+            if (orientation == "v" && verticalNumber == number) {
+                return true;
             }
         }
 
-        if (orientation == 'd') {
+        if (orientation == "md" || orientation == "sd") {
             int mainDiagonalNumber = 0;
             int sideDiagonalNumber = 0;
 
@@ -148,14 +187,14 @@ public class Main {
                     sideDiagonalNumber++;
                 }
             }
-            if (mainDiagonalNumber == number) {
-                return 0;
+            if (orientation == "md" && mainDiagonalNumber == number) {
+                return true;
             }
-            if (sideDiagonalNumber == number) {
-                return 1;
+            if (orientation == "sd" && sideDiagonalNumber == number) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
     
     static boolean isDraw(char[][] field) {
@@ -170,42 +209,13 @@ public class Main {
     }
     
     static boolean isWin(char[][] field, char sign) {
-        //horizontal & vertical
-        int horizontalNumber;
-        int verticalNumber;
-
-        for (int i = 0; i < field.length; i++) {
-            horizontalNumber = 0;
-            verticalNumber = 0;
-            for (int j = 0; j < field[i].length; j++) {
-                if (field[i][j] == sign) {
-                    horizontalNumber++;
-                }
-
-                if (field[j][i] == sign) {
-                    verticalNumber++;
+        String[] orientations = getOrientations();
+        for (int orientation = 0; orientation < orientations.length; orientation++) {
+            for (int lineNumber = 0; lineNumber < field.length; lineNumber++) {
+                if (isLineWithNumberOfSigns(field, sign, field.length, orientations[orientation], lineNumber)) {
+                    return true;
                 }
             }
-            if (horizontalNumber == field.length || verticalNumber == field.length) {
-                return true;
-            }
-        }
-
-        //diagonal
-        int mainDiagonalNumber = 0;
-        int sideDiagonalNumber = 0;
-
-        for (int i = 0; i < field.length; i++) {
-            if (field[i][i] == sign) {
-                mainDiagonalNumber++;
-            }
-
-            if (field[i][field.length - 1 - i] == sign) {
-                sideDiagonalNumber++;
-            }
-        }
-        if (mainDiagonalNumber == field.length || sideDiagonalNumber == field.length) {
-            return true;
         }
         return false;
     }
