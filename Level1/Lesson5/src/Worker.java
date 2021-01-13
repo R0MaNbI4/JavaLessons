@@ -6,7 +6,7 @@ public class Worker {
     private int salary;
     private int age;
 
-    Worker (String fullName, String position, String email, String phone, int salary, int age) {
+    public Worker (String fullName, String position, String email, String phone, int salary, int age) {
         this.fullName = fullName;
         this.position = position;
         this.email = email;
@@ -15,13 +15,14 @@ public class Worker {
         this.age = age;
     }
 
-    void getInfo() {
-        System.out.println("ФИО: " + fullName);
-        System.out.println("Должность: " + position);
-        System.out.println("E-mail: " + email);
-        System.out.println("Телефон: " + phone);
-        System.out.println("Зарплата: " + salary);
-        System.out.println("Возраст: " + age);
+    @Override
+    public String toString() {
+        return  "ФИО: " + fullName + "\n" +
+                "Должность: " + position + "\n" +
+                "E-mail: " + email + "\n" +
+                "Телефон: " + phone + "\n" +
+                "Зарплата" + salary + "\n" +
+                "Возраст: " + age;
     }
 
     public String getFullName() {
