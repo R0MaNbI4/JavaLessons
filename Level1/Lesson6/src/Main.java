@@ -1,13 +1,13 @@
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat("Муся");
+        Cat cat = new Cat("Муся", 200);
         cat.run(150);
         cat.run(250);
         cat.swim(3);
 
         System.out.println();
 
-        Dog dog = new Dog("Рекс");
+        Dog dog = new Dog("Рекс", 500, 10);
         dog.run(350);
         dog.run(600);
         dog.swim(7);
