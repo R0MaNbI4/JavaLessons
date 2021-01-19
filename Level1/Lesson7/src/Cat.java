@@ -2,11 +2,7 @@ public class Cat {
     private boolean satiety;
 
     public void eat(Food food, int amount) {
-        if (food.takeFood(amount)) {
-            satiety = true;
-        } else {
-            satiety = false;
-        }
+        satiety = food.takeFood(amount);
     }
 
     public void printSatiety() {
