@@ -39,8 +39,6 @@ public class CalculatorFrame extends JFrame {
         add(bottom, BorderLayout.CENTER);
         add(right, BorderLayout.EAST);
 
-        DigitButtonListener digitButtonListener = new DigitButtonListener(inputField);
-
         for (int i = 9; i >= 0; i--) {
             JButton button = new JButton(String.valueOf(i));
             button.addActionListener(new ActionListener() {
