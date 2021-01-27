@@ -39,8 +39,6 @@ public class CalculatorFrame extends JFrame {
         add(bottom, BorderLayout.CENTER);
         add(right, BorderLayout.EAST);
 
-        DigitButtonListener digitButtonListener = new DigitButtonListener(inputField);
-
         for (int i = 9; i >= 0; i--) {
             JButton button = new JButton(String.valueOf(i));
             button.addActionListener(new ActionListener() {
@@ -154,7 +152,7 @@ public class CalculatorFrame extends JFrame {
             }
         });
 
-        JButton rightBracket = new JButton("\u1f814");
+        JButton rightBracket = new JButton(")");
         bottom.add(rightBracket);
         rightBracket.addActionListener(new ActionListener() {
             @Override
@@ -167,9 +165,6 @@ public class CalculatorFrame extends JFrame {
                 inputField.setText(sb.toString());
             }
         });
-
-        //setLayout(new GridLayout(4, 3));
-        //setLayout(new BorderLayout());
 
         setVisible(true);
     }
