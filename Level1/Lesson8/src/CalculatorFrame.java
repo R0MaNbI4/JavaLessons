@@ -39,77 +39,29 @@ public class CalculatorFrame extends JFrame {
         add(bottom, BorderLayout.CENTER);
         add(right, BorderLayout.EAST);
 
+        DigitButtonListener digitButtonListener = new DigitButtonListener(inputField);
+
         for (int i = 9; i >= 0; i--) {
             JButton button = new JButton(String.valueOf(i));
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JButton button = (JButton) e.getSource();
-
-                    StringBuilder sb = new StringBuilder(inputField.getText());
-                    sb.append(button.getText());
-
-                    inputField.setText(sb.toString());
-                }
-            });
+            button.addActionListener(digitButtonListener);
             bottom.add(button);
         }
 
         JButton add = new JButton("+");
         right.add(add);
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton) e.getSource();
-
-                StringBuilder sb = new StringBuilder(inputField.getText());
-                sb.append(button.getText());
-
-                inputField.setText(sb.toString());
-            }
-        });
+        add.addActionListener(digitButtonListener);
 
         JButton subtract = new JButton("-");
         right.add(subtract);
-        subtract.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton) e.getSource();
-
-                StringBuilder sb = new StringBuilder(inputField.getText());
-                sb.append(button.getText());
-
-                inputField.setText(sb.toString());
-            }
-        });
+        subtract.addActionListener(digitButtonListener);
 
         JButton multiply = new JButton("*");
         right.add(multiply);
-        multiply.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton) e.getSource();
-
-                StringBuilder sb = new StringBuilder(inputField.getText());
-                sb.append(button.getText());
-
-                inputField.setText(sb.toString());
-            }
-        });
+        multiply.addActionListener(digitButtonListener);
 
         JButton divide = new JButton("/");
         right.add(divide);
-        divide.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton) e.getSource();
-
-                StringBuilder sb = new StringBuilder(inputField.getText());
-                sb.append(button.getText());
-
-                inputField.setText(sb.toString());
-            }
-        });
+        divide.addActionListener(digitButtonListener);
 
         JButton clear = new JButton("C");
         bottom.add(clear);
@@ -140,31 +92,11 @@ public class CalculatorFrame extends JFrame {
 
         JButton leftBracket = new JButton("(");
         bottom.add(leftBracket);
-        leftBracket.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton) e.getSource();
-
-                StringBuilder sb = new StringBuilder(inputField.getText());
-                sb.append(button.getText());
-
-                inputField.setText(sb.toString());
-            }
-        });
+        leftBracket.addActionListener(digitButtonListener);
 
         JButton rightBracket = new JButton(")");
         bottom.add(rightBracket);
-        rightBracket.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton) e.getSource();
-
-                StringBuilder sb = new StringBuilder(inputField.getText());
-                sb.append(button.getText());
-
-                inputField.setText(sb.toString());
-            }
-        });
+        rightBracket.addActionListener(digitButtonListener);
 
         setVisible(true);
     }
