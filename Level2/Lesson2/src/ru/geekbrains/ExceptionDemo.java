@@ -6,14 +6,9 @@ public class ExceptionDemo {
     private String[][] arr = new String[4][4];
 
     void setArray(String[][] arr) throws MySizeArrayException {
-        if (arr.length == 4) {
-            for (int i = 0; i < arr.length - 1; i++) {
-                if (arr[i].length != 4) {
-                    throw new MySizeArrayException("Wrong array size");
-                }
-            }
-        } else {
-            throw new MySizeArrayException("Wrong array size");
+        checkSizeCondition(arr);
+        for (int i = 0; i < arr.length; i++) {
+            checkSizeCondition(arr[i]);
         }
         this.arr = arr;
     }
@@ -30,5 +25,17 @@ public class ExceptionDemo {
             }
         }
         return sum;
+    }
+
+    void checkSizeCondition(String[][] arr) {
+        if (arr.length != 4) {
+            throw new MySizeArrayException("Wrong array size");
+        }
+    }
+
+    void checkSizeCondition(String[] arr) {
+        if (arr.length != 4) {
+            throw new MySizeArrayException("Wrong array size");
+        }
     }
 }

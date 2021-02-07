@@ -18,16 +18,16 @@ public class Main {
         try {
             exceptionDemo.setArray(arr);
         } catch (MySizeArrayException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
         try {
             System.out.println(exceptionDemo.sumArray());
         } catch (MyArrayDataException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             e.printStackTrace();
-            e.getCause();
+            System.out.println("Caused by: " + e.getCause());
         }
     }
 }
