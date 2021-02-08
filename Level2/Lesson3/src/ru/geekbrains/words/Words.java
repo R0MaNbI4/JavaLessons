@@ -8,12 +8,11 @@ public class Words {
 
     public Words(String[] words) {
         this.words = words;
+//        uniqueWords.addAll(Arrays.asList(words.clone()));
+        Collections.addAll(uniqueWords, words);
     }
 
     public void printUniqueWords() {
-//        uniqueWords.addAll(Arrays.asList(words.clone()));
-        Collections.addAll(uniqueWords, words);
-
 //        Iterator<String> iterator = uniqueWords.iterator();
 //        while (iterator.hasNext()) {
 //            System.out.println(iterator.next());
