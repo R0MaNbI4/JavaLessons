@@ -1,26 +1,21 @@
 package ru.geekbrains.phonebook;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Phonebook {
-    Map<String, ArrayList<String>> phonebook = new HashMap<>();
+    Map<String, HashSet<String>> phonebook = new HashMap<>();
 
     public void add(String lastName, String phoneNumber) {
-        ArrayList<String> phoneList = phonebook.containsKey(lastName) ? phonebook.get(lastName) : new ArrayList<>();
+        HashSet<String> phoneList = phonebook.containsKey(lastName) ? phonebook.get(lastName) : new HashSet<>();
         phoneList.add(phoneNumber);
         phonebook.put(lastName, phoneList);
     }
 
-    public void get(String lastName) {
+    public Set<String> get(String lastName) {
         if (phonebook.containsKey(lastName)) {
-            ArrayList<String> phoneList = phonebook.get(lastName);
-            for (String phoneNumber : phoneList) {
-                System.out.println(lastName + ": " + phoneNumber);
-            }
+            return phonebook.get(lastName);
         } else {
-            System.out.println("Last name not found");
+            return Collections.emptySet();
         }
     }
 }

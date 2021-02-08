@@ -8,11 +8,12 @@ public class Words {
 
     public Words(String[] words) {
         this.words = words;
-//        uniqueWords.addAll(Arrays.asList(words.clone()));
-        Collections.addAll(uniqueWords, words);
     }
 
     public void printUniqueWords() {
+//        uniqueWords.addAll(Arrays.asList(words.clone()));
+        Collections.addAll(uniqueWords, words);
+
 //        Iterator<String> iterator = uniqueWords.iterator();
 //        while (iterator.hasNext()) {
 //            System.out.println(iterator.next());
@@ -23,15 +24,13 @@ public class Words {
     }
 
     public void printNumberOfRepetitions() {
-        int repetitions;
-        for (String uniqueWord : uniqueWords) {
-            repetitions = 0;
-            for (String word : words) {
-                if (word.equals(uniqueWord)) {
-                    repetitions++;
-                }
-            }
-            System.out.printf("\"%s\" repeat %d times\n", uniqueWord, repetitions);
+        Map<String, Integer> repetitions = new HashMap<>();
+        for (String word : words) {
+            repetitions.put(word, repetitions.containsKey(word) ? repetitions.get(word) + 1 : 1);
+        }
+
+        for (Map.Entry<String, Integer> entry : repetitions.entrySet()) {
+            System.out.printf("\"%s\" repeat %d times\n", entry.getKey(), entry.getValue());
         }
     }
 }

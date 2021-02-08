@@ -5,24 +5,25 @@ import ru.geekbrains.words.*;
 
 public class Main {
     public static void main(String[] args) {
-        wordsDemo();
+        doWordsDemo();
         System.out.println();
-        phonebookDemo();
+        doPhonebookDemo();
     }
 
-    static void wordsDemo() {
+    static void doWordsDemo() {
         Words words = new Words(WordList.getWordList());
         words.printUniqueWords();
         words.printNumberOfRepetitions();
     }
 
-    static void phonebookDemo() {
+    static void doPhonebookDemo() {
         Phonebook phonebook = new Phonebook();
         phonebook.add("Ivanov", "892912");
         phonebook.add("Petrov", "9812421");
+        phonebook.add("Petrov", "9812421");
         phonebook.add("Ivanov", "9807124");
-        phonebook.get("Ivanov");
-        phonebook.get("Petrov");
-        phonebook.get("Sidorov");
+        System.out.println("Ivanov: " + phonebook.get("Ivanov"));
+        System.out.println("Petrov: " + phonebook.get("Petrov"));
+        System.out.println("Sidorov: " + phonebook.get("Sidorov"));
     }
 }
