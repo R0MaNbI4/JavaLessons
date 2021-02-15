@@ -22,6 +22,7 @@ public class ChatFrame extends JFrame {
         messageHistoryPanel.setLayout(new BorderLayout());
 
         JTextArea messageHistory = new JTextArea();
+        messageHistory.setEditable(false);
         JScrollPane messageHistoryScroll = new JScrollPane(messageHistory);
         messageHistoryPanel.add(messageHistoryScroll, BorderLayout.CENTER);
 
