@@ -13,6 +13,7 @@ public class ClientHandler {
     private final DataInputStream in;
     private final DataOutputStream out;
     private String name;
+    private String message;
 
     public ClientHandler(Server server, Socket socket) {
         try {
@@ -72,8 +73,29 @@ public class ClientHandler {
 
     public void readMessage() throws IOException {
         while (true) {
-            String message = in.readUTF();
-            server.broadcast(name + ": " + message);
+            message = in.readUTF();
+            if (message.startsWith("-w")) {
+                whisper();
+            } else {
+                server.broadcast(name + ": " + message);
+            }
+        }
+    }
+
+    private void whisper() {
+        String[] parameters = message.split("\\s");
+        ClientHandler recipient = server.findUserByNickname(parameters[1]);
+        StringBuilder sb = new StringBuilder(parameters[2]);
+        for (int i = 3; i < parameters.length ; i++) {
+            sb.append(" ").append(parameters[i]);
+        }
+        String privateMessage = sb.toString();
+        if (recipient != null) {
+            privateMessage = this.getName() + "->" + recipient.getName() + ": " + privateMessage;
+            sendMessage(privateMessage);
+            server.sendMessage(recipient, privateMessage);
+        } else {
+            sendMessage("User not found");
         }
     }
 

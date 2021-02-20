@@ -61,4 +61,17 @@ public class Server {
     public void unsubscribe(ClientHandler handler) {
         handlers.remove(handler);
     }
+
+    public ClientHandler findUserByNickname(String name) {
+        for (ClientHandler handler : handlers) {
+            if (handler.getName().equals(name)) {
+                return handler;
+            }
+        }
+        return null;
+    }
+
+    public void sendMessage(ClientHandler handler, String message) {
+        handler.sendMessage(message);
+    }
 }

@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Scanner;
 
 public class Client {
@@ -20,24 +21,30 @@ public class Client {
             new Thread(() -> {
                 Scanner scanner = new Scanner(System.in);
                 while (true) {
-                    sendMessage(scanner.nextLine());
+                    try {
+                        sendMessage(scanner.nextLine());
+                    } catch (IOException e) {
+                        System.out.println("Server is not available");
+                        break;
+                    }
                 }
             })
                     .start();
 
             while (true) {
-                System.out.println(in.readUTF());
+                try {
+                    System.out.println(in.readUTF());
+                } catch (SocketException e) {
+                    System.out.println("Server is not available");
+                    break;
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException("SWW", e);
         }
     }
 
-    private void sendMessage(String message) {
-        try {
+    private void sendMessage(String message) throws IOException {
             out.writeUTF(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
