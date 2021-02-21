@@ -14,7 +14,7 @@ public class InputFieldKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == 10) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             Send.send((JTextField) e.getComponent(), textArea);
         }
     }
