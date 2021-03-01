@@ -1,11 +1,10 @@
 package ru.geekbrains.chat.client;
 
-import ru.geekbrains.chat.client.gui.Callback;
 import ru.geekbrains.chat.client.gui.ClientChatFrame;
 
 import java.util.function.Consumer;
 
-public class ClientChatAdapter implements Callback {
+public class ClientChatAdapter {
     private final BasicChatNetwork network;
     private final ClientChatFrame frame;
 
@@ -16,8 +15,7 @@ public class ClientChatAdapter implements Callback {
             public void accept(String message) {
                 network.send(message);
             }
-        },
-                this);
+        });
 
         receive();
     }
@@ -27,15 +25,11 @@ public class ClientChatAdapter implements Callback {
             while (true) {
                 frame.append(network.receive());
             }
-        });
+        })
+                .start();
     }
 
     private void onClose() {
         network.close();
-    }
-
-    @Override
-    public void callingBack() {
-        onClose();
     }
 }

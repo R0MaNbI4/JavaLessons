@@ -14,9 +14,8 @@ public class ChatFrame extends JFrame {
     private final JPanel top;
     private final JPanel bottom;
     private final JTextArea chatArea;
-    private Callback callback;
 
-    public ChatFrame(String title, Consumer<String> consumer, Callback onCloseCallback) {
+    public ChatFrame(String title, Consumer<String> consumer) {
         setTitle(title);
         setBounds(X_CENTER, Y_CENTER, WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -28,14 +27,6 @@ public class ChatFrame extends JFrame {
         bottom = createBottom(consumer);
 
         setVisible(true);
-
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                onCloseCallback.callingBack();
-            }
-        });
     }
 
     private JPanel createTop() {

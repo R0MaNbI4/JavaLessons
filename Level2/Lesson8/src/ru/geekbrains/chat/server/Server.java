@@ -56,10 +56,12 @@ public class Server {
 
     public synchronized void subscribe(ClientHandler handler) {
         handlers.add(handler);
+        System.out.println(handlers);
     }
 
     public synchronized void unsubscribe(ClientHandler handler) {
         handlers.remove(handler);
+        System.out.println(handlers);
     }
 
     public ClientHandler findUserByNickname(String name) {
