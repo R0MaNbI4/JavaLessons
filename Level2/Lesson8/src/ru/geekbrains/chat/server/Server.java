@@ -27,12 +27,12 @@ public class Server {
     }
 
     private void init() throws IOException {
-            while (true) {
-                System.out.println("Server is waiting for a connection...");
-                Socket client = serverSocket.accept();
-                System.out.println("Client accepted: " + client);
-                new ClientHandler(this, client);
-            }
+        while (true) {
+            System.out.println("Server is waiting for a connection...");
+            Socket client = serverSocket.accept();
+            System.out.println("Client accepted: " + client);
+            new ClientHandler(this, client);
+        }
     }
 
     public AuthenticationService getAuthenticationService() {

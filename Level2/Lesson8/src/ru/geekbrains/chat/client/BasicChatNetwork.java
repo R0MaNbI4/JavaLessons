@@ -2,6 +2,7 @@ package ru.geekbrains.chat.client;
 
 import ru.geekbrains.chat.client.network.ClientNetwork;
 
+import javax.print.DocFlavor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -24,10 +25,6 @@ public class BasicChatNetwork implements ClientNetwork {
         }
     }
 
-    private void sendMessage(String message) throws IOException {
-            out.writeUTF(message);
-    }
-
     @Override
     public void send(String message) {
         try {
@@ -43,6 +40,14 @@ public class BasicChatNetwork implements ClientNetwork {
             return in.readUTF();
         } catch (IOException e) {
             throw new RuntimeException("SWW during receive", e);
+        }
+    }
+
+    public void close() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

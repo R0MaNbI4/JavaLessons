@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientHandler {
     private final Server server;
@@ -33,7 +34,9 @@ public class ClientHandler {
             doAuth();
             readMessage();
         } catch (IOException e) {
-            e.printStackTrace();
+            server.unsubscribe(this);
+            server.broadcast(this.name + " disconnected");
+            System.out.println(this.name + " disconnected");
         }
     }
 

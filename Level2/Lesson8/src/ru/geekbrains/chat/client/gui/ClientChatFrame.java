@@ -7,8 +7,8 @@ import java.util.function.Consumer;
 public class ClientChatFrame extends JFrame implements ChatFrameInteraction {
     private final ChatFrame chatFrame;
 
-    public ClientChatFrame(Consumer<String> messageConsumer) {
-        this.chatFrame = new ChatFrame("Chat", messageConsumer);
+    public ClientChatFrame(Consumer<String> messageConsumer, Callback onCloseCallback) {
+        this.chatFrame = new ChatFrame("Chat", messageConsumer, onCloseCallback);
     }
 
     @Override
