@@ -1,12 +1,16 @@
 package ru.geekbrains.chat.server;
 
 import ru.geekbrains.chat.server.auth.AuthEntry;
+import ru.geekbrains.chat.server.db.DBConnection;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import static java.lang.Thread.currentThread;
 
@@ -15,6 +19,7 @@ public class ClientHandler {
     private final Socket socket;
     private final DataInputStream in;
     private final DataOutputStream out;
+    private String login;
     private String name;
     private String message;
     private final long timer;
@@ -56,23 +61,28 @@ public class ClientHandler {
             String input = in.readUTF();
             if (input.startsWith("-auth")) {
                 String[] credentials = input.split("\\s");
-                AuthEntry maybeAuthEntry = server.getAuthenticationService()
-                        .findUserByCredentials(credentials[1], credentials[2]);
-                if (maybeAuthEntry != null) {
-                    if (server.isNicknameFree(maybeAuthEntry.getNickname())) {
+                if (credentials.length == 3) {
+                    AuthEntry maybeAuthEntry = server.getAuthenticationService()
+                            .findUserByCredentials(credentials[1], credentials[2]);
+                    if (maybeAuthEntry != null) {
+                        if (server.isNicknameFree(maybeAuthEntry.getNickname())) {
                             sendMessage("CMD: auth is OK");
                             name = maybeAuthEntry.getNickname();
+                            login = maybeAuthEntry.getLogin();
                             server.broadcast(name + " logged-in");
                             server.subscribe(this);
                             break;
+                        } else {
+                            sendMessage("User is already logged-in");
+                        }
                     } else {
-                        sendMessage("User is already logged-in");
+                        sendMessage("User not found. Incorrect login/password");
                     }
                 } else {
-                    sendMessage("User not found. Incorrect login/password");
+                    sendMessage("Missing credentials");
                 }
             } else {
-                sendMessage("Invalid authentication request");
+                sendMessage("Invalid authentication request. Type -auth login pass");
             }
         }
     }
@@ -90,9 +100,27 @@ public class ClientHandler {
             message = in.readUTF();
             if (message.startsWith("-w")) {
                 whisper();
+            } else if (message.startsWith("-cn")) {
+                changeNickname();
             } else {
                 server.broadcast(name + ": " + message);
             }
+        }
+    }
+
+    private void changeNickname() {
+        String newNickname = message.split("\\s")[1];
+
+        Connection connection = DBConnection.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE credentials SET nickname = ? WHERE login = ?;");
+            statement.setString(1, newNickname);
+            statement.setString(2, login);
+            statement.execute();
+            sendMessage(String.format("Nickname changed from \"%s\" to \"%s\"", name, newNickname));
+            name = newNickname;
+        } catch (SQLException throwables) {
+            throw new RuntimeException(throwables);
         }
     }
 

@@ -82,7 +82,7 @@ public class ChatFrame extends JFrame {
 
             StringBuilder sb = new StringBuilder(chatArea.getText());
             sb.append(newMessage + "\n");
-            chatArea.setText(sb.toString());
+            //chatArea.setText(sb.toString());
             inputField.setText("");
 
             consumer.accept(newMessage);
