@@ -20,14 +20,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60405d7f-8234-4a9f-9975-7460f7964261" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/BasicChatNetwork.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/BasicChatNetwork.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/ClientChatAdapter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/ClientChatAdapter$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/ClientChatAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/ClientChatAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ChatFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ChatFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ChatFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ChatFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ChatFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ChatFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ClientChatFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/client/gui/ClientChatFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Lesson8/ru/geekbrains/chat/server/ClientHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/Lesson2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/BasicChatNetwork.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/ClientChatAdapter$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/ClientChatAdapter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/ClientOne.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/ClientTwo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/gui/ChatFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/gui/ChatFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/gui/ChatFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/gui/ChatFrameInteraction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/gui/ClientChatFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/client/network/ClientNetwork.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/server/ClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/server/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/server/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/server/auth/AuthEntry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/server/auth/AuthenticationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/out/production/Lesson2/ru/geekbrains/chat/server/db/DBConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/BasicChatNetwork.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/ClientChatAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/ClientOne.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/ClientTwo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/gui/ChatFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/gui/ChatFrameInteraction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/gui/ClientChatFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/client/network/ClientNetwork.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/server/ClientHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/server/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/server/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/server/auth/AuthEntry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/server/auth/AuthenticationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Level3/Lesson3/src/ru/geekbrains/chat/server/db/DBConnection.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
