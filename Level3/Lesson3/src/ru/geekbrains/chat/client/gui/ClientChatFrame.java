@@ -17,5 +17,6 @@ public class ClientChatFrame extends JFrame implements ChatFrameInteraction {
     public void append(String message) {
         chatFrame.getChatArea().append(message);
         chatFrame.getChatArea().append("\n");
+        chatFrame.scrollDown();
     }
 }

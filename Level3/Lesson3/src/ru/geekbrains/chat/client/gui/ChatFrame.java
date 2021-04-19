@@ -14,6 +14,7 @@ public class ChatFrame extends JFrame {
     private final JPanel top;
     private final JPanel bottom;
     private final JTextArea chatArea;
+    private final JScrollBar scrollBar;
 
     public ChatFrame(String title, Consumer<String> consumer) {
         setTitle(title);
@@ -23,6 +24,7 @@ public class ChatFrame extends JFrame {
         setLayout(new BorderLayout());
 
         chatArea = new JTextArea();
+        scrollBar = new JScrollBar();
         top = createTop();
         bottom = createBottom(consumer);
 
@@ -36,12 +38,17 @@ public class ChatFrame extends JFrame {
 
         chatArea.setEditable(false);
         JScrollPane chatAreaScroll = new JScrollPane(chatArea);
+        chatAreaScroll.setVerticalScrollBar(scrollBar);
         top.add(chatAreaScroll, BorderLayout.CENTER);
         return top;
     }
 
     public JTextArea getChatArea() {
         return chatArea;
+    }
+
+    public void scrollDown() {
+        scrollBar.setValue(scrollBar.getMaximum() );
     }
 
     private JPanel createBottom(Consumer<String> consumer) {
