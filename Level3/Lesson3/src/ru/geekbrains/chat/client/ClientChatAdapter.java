@@ -18,6 +18,7 @@ public class ClientChatAdapter {
             }
         });
 
+        loadMessages();
         receive();
     }
 
@@ -30,6 +31,10 @@ public class ClientChatAdapter {
             }
         })
                 .start();
+    }
+
+    private void loadMessages() {
+        MessageLog.loadMessages(frame);
     }
 
     private void onClose() {
