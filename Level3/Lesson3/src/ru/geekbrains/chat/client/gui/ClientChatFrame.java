@@ -1,5 +1,7 @@
 package ru.geekbrains.chat.client.gui;
 
+import ru.geekbrains.chat.client.data.MessageLog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.function.Consumer;

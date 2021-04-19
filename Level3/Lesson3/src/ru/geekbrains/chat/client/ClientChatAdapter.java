@@ -1,5 +1,6 @@
 package ru.geekbrains.chat.client;
 
+import ru.geekbrains.chat.client.data.MessageLog;
 import ru.geekbrains.chat.client.gui.ClientChatFrame;
 
 import java.util.function.Consumer;
@@ -23,7 +24,9 @@ public class ClientChatAdapter {
     public void receive() {
         new Thread(() -> {
             while (true) {
-                frame.append(network.receive());
+                String message = network.receive();
+                MessageLog.addMessage(message);
+                frame.append(message);
             }
         })
                 .start();
