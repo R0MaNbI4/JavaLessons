@@ -1,6 +1,8 @@
 *.txt
+*.exe
 
 /**/Practice/*
 /**/Tests/*
 /libraries/*
 /**/.idea/*
+/**/artifacts/*
