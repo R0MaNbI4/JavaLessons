@@ -1,5 +1,6 @@
 package ru.geekbrains.chat.server;
 
+import org.apache.logging.log4j.core.Logger;
 import ru.geekbrains.chat.server.auth.AuthEntry;
 import ru.geekbrains.chat.server.auth.AuthenticationService;
 
@@ -8,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.LogManager;
 
 public class Server {
     private final ServerSocket serverSocket;
@@ -30,6 +32,7 @@ public class Server {
             System.out.println("Server is waiting for a connection...");
             Socket client = serverSocket.accept();
             System.out.println("Client accepted: " + client);
+
             new ClientHandler(this, client);
         }
     }
