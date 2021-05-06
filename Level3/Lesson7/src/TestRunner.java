@@ -12,12 +12,16 @@ public class TestRunner {
     private static ArrayList<Method> tests;
 
     public static void start(Class testClass) {
-        beforeSuite = null; // Необходимо, если TestRunner будет использоваться для вызова нескольких разных тестов
+        reset();
+        getMethods(testClass);
+        sortTests();
+        invokeMethods(createNewInstance(testClass));
+    }
+
+    private static void reset() {
+        beforeSuite = null;
         afterSuite = null;
         tests = new ArrayList<>();
-
-        getMethods(testClass);
-        invokeMethods(createNewInstance(testClass));
     }
 
     private static void invokeMethods(Test test) {
@@ -35,24 +39,29 @@ public class TestRunner {
 
     private static void getMethods(Class<Test> testClass) {
         for (Method method : testClass.getMethods()) {
-            if (method.getAnnotation(AfterSuite.class) != null) {
-                if (afterSuite != null) {
-                    throw new RuntimeException("There can be no more than one method with annotation \"AfterSuite\"");
-                }
-                afterSuite = method;
-            }
-            if (method.getAnnotation(BeforeSuite.class) != null) {
-                if (beforeSuite != null) {
-                    throw new RuntimeException("There can be no more than one method with annotation \"BeforeSuite\"");
-                }
-                beforeSuite = method;
-            }
-            if (method.getAnnotation(Annotations.Test.class) != null) {
+            afterSuite = getSingletonMethod(method, AfterSuite.class, afterSuite);
+            beforeSuite = getSingletonMethod(method, BeforeSuite.class, beforeSuite);
+            if (isTest(method)) {
                 tests.add(method);
             }
         }
+    }
 
-        sortTests();
+    private static Method getSingletonMethod(Method verifiableMethod, Class annotation, Method methodStorage) {
+        if (verifiableMethod.getAnnotation(annotation) != null) {
+            if (methodStorage != null) {
+                throw new RuntimeException(String.format("There can be no more than one method with annotation \"%s\"", annotation.getName()));
+            }
+            return verifiableMethod;
+        }
+        return methodStorage;
+    }
+
+    private static boolean isTest(Method method) {
+        if (method.getAnnotation(Annotations.Test.class) != null) {
+            return true;
+        }
+        return false;
     }
 
     private static Test createNewInstance(Class testClass) {
