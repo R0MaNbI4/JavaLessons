@@ -52,8 +52,9 @@ public class TestRunner {
             if (methodStorage != null) {
                 throw new RuntimeException(String.format("There can be no more than one method with annotation \"%s\"", annotation.getName()));
             }
+            return verifiableMethod;
         }
-        return verifiableMethod;
+        return methodStorage;
     }
 
     private static boolean isTest(Method method) {
